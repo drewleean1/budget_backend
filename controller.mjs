@@ -3,7 +3,7 @@ import express from 'express';
 import * as expenses from './model.mjs';
 import * as budget from './budget.mjs';
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
