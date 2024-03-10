@@ -59,8 +59,6 @@ const retrieveExpenseByCategoryMY = async(category, month, year) => {
     return query.exec();
 }
 
-
-
 const retrieveExpenseByDateRange = async(startDate, endDate) => {
     let stringStartDate = String(startDate); 
     let stringEndDate = String(endDate)
@@ -69,9 +67,13 @@ const retrieveExpenseByDateRange = async(startDate, endDate) => {
 }
 
 const retrieveExpenseByMonthYear = async(month, year) => {
-    const query = Expense.find({$expr: {$and: [{"$eq": [{ "$month": "$date"},month]},{"$eq": [{"$year": "$date"},year]}]}})
-    return query.exec(); 
+    const query = Expense.find()
+    return query.exec(); {$expr: {$and: [{"$eq": [{ "$month": "$date"},month]},{"$eq": [{"$year": "$date"},year]}]}}
+}
 
+const retrieveExpenseByYear = async(month, year) => {
+    const query = Expense.find()
+    return query.exec(); {$expr: {$and: [{"$eq": [{"$year": "$date"},year]}]}}
 }
 
 const deleteExpenseById = async (_id) => {
@@ -98,4 +100,4 @@ const updateExpense = async(_id, date, item, amount, category, method) => {
 }
 
 
-export {createExpense, retrieveExpense, retrieveExpenseById, retrieveExpenseByCategory, retrieveExpenseByCategoryMY, retrieveExpenseByDateRange, retrieveExpenseByMonthYear, deleteExpenseById, updateExpense}
+export {createExpense, retrieveExpense, retrieveExpenseById, retrieveExpenseByCategory, retrieveExpenseByCategoryMY, retrieveExpenseByDateRange, retrieveExpenseByMonthYear, retrieveExpenseByYear, deleteExpenseById, updateExpense}

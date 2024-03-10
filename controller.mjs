@@ -127,8 +127,22 @@ app.get('/expenses/month/:Month/year/:Year', (req, res) => {
             console.log(error); 
             res.status(400).json({Error: 'We failed to retrieve your expenses.'});
         });
-        
+});
 
+app.get('/expenses/year/:Year', (req, res) => {
+    expenses.retrieveExpenseByYear(req.params.Year)
+        .then(expense => {
+            if (expense !== null) {
+                res.json(expense);
+            } 
+            else {
+                res.status(404).json({Error: 'Sorry. We were unable to find your expenses.'});
+            }
+        })
+        .catch(error => {
+            console.log(error); 
+            res.status(400).json({Error: 'We failed to retrieve your expenses.'});
+        });
 });
 
 app.put('/expenses/:_id', (req, res) => {
